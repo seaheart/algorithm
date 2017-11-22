@@ -22,29 +22,44 @@ Output: 7 -> 0 -> 8
 
 
 var addTwoNumbers = function (l1, l2) {
-  var firstStr = '', secStr = ''
-  do {
-    firstStr += l1.var
-  } while (l1.next)
+    var firstArr = [], secArr = [], sumArr = [];
+    do {
+        firstArr.push(l1.val)
+        l1 = l1.next
+    } while (l1);
 
-  do {
-    secStr += l2.var
-  } while (l2.next)
+    do {
+        secArr.push(l2.val)
+        l2 = l2.next
+    } while (l2);
 
-  var firstNum = parseInt(firstStr.reverse())
-  var secNum = parseInt(secStr.reverse())
-  var sumNum = firstNum + secNum
-  var sumStr = sumNum.toString().reverse()
+    var inputLength = secArr.length;
+    if(firstArr.length > secArr.length){
+        inputLength = firstArr.length;
+        for(var j = secArr.length; j < inputLength; j++){
+            secArr[j] = 0
+        }
+    }else{
+        for(var k = firstArr.length; k < inputLength; k++){
+            firstArr[k] = 0
+        }
+    }
 
-  var returnStr = {}
-  toLinkedList(returnStr,sumStr)
-  return returnStr
-}
+    for(var i = 0; i < inputLength; i++){
+        sumArr[i] = firstArr[i] + secArr[i]
+    }
 
-var toLinkedList = function (returnStr, str) {
-  if (str) {
-    returnStr.val = str.
-  } else {
-    returnStr.next = null
-  }
+    sumArr.forEach(function (t,index) {
+        if(t >= 10){
+            if(index !== sumArr.length - 1){
+                sumArr[index + 1] = sumArr[index + 1] + 1;
+            }else{
+                sumArr[index + 1] = 1
+            }
+            sumArr[index] = t - 10
+        }
+        return
+    });
+
+    return sumArr
 }
