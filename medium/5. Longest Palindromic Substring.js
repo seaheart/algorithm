@@ -20,17 +20,25 @@ Output: "bb"
  * @return {string}
  */
 var longestPalindrome = function (s) {
-  var longestString = s[0]
-  var leftIndex = 0
-  var currentIndex = 0
-  var rightIndex = 0
+  var longestString = s[0];
+  var leftIndex = 0;
+  var currentIndex = 0;
+  var rightIndex = 0;
 
   while (currentIndex < s.length) {
-    leftIndex = currentIndex - 1
-    rightIndex = currentIndex + 1
+    leftIndex = currentIndex - 1;
+    rightIndex = currentIndex + 1;
 
-    if (s[rightIndex] === s[currentIndex]) {
-      leftIndex = currentIndex
+    while (s[rightIndex] === s[currentIndex]){
+      rightIndex ++;
+    }
+
+    while (s[leftIndex] === s[currentIndex]){
+      leftIndex --;
+    }
+
+    if(rightIndex - leftIndex - 1 > longestString.length){
+        longestString = s.substring(leftIndex + 1, rightIndex)
     }
 
     while (leftIndex >= 0 && rightIndex <= s.length - 1) {
@@ -38,10 +46,10 @@ var longestPalindrome = function (s) {
         if ((leftIndex === 0 || rightIndex === s.length - 1) && rightIndex - leftIndex + 1 > longestString.length) {
           longestString = s.substring(leftIndex, rightIndex + 1)
         }
-        leftIndex--
+        leftIndex--;
         rightIndex++
       } else {
-        var currentLength = rightIndex - leftIndex - 1
+        var currentLength = rightIndex - leftIndex - 1;
         if (currentLength > longestString.length) {
           longestString = s.substring(leftIndex + 1, rightIndex)
         }
@@ -53,4 +61,4 @@ var longestPalindrome = function (s) {
     currentIndex++
   }
   return longestString
-}
+};
